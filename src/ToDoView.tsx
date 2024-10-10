@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import data from './data';
 
+
 interface ToDoItem {
    id: number;
    text: string;
@@ -10,8 +11,7 @@ interface ToDoItem {
 const ToDoView: React.FC = () => {
     const [todos, setTodos] = useState<ToDoItem[]>(data.todos)
     const [newToDoText, setNewTodoText] = useState<string>('');
-    
-    //Create To Do
+
     const addTodo = () => {
         const addToDo: ToDoItem = {
             id: todos.length + 1,
@@ -22,12 +22,10 @@ const ToDoView: React.FC = () => {
         setNewTodoText('');
     }
 
-    //Delete To Do
-    const removeToDo = (id: number) => {
-        setTodos(todos.filter(todo => todo.id !== id));
+    const deleteToDo = (id: number) => {
+        setTodos(todos.filter(todo => todo.id !== id)); 
     }
 
-    //Edit To Do
     const editToDo = (text: string, id: number) => {
         setTodos(todos.map(todo => {
             if(todo.id === id){
@@ -55,10 +53,12 @@ const ToDoView: React.FC = () => {
                     setNewTodoText(e.currentTarget.value);
                 }}
             />
+            <span contenteditable="true">test</span>
             <button onClick={() => {addTodo()}}>Add</button>
-            <ul>
+            <ul> 
+                <p>this is a test </p>
                 {todos.map(todo => (
-                    <li key={todo.id}>
+                    <li className="todoelement" key={todo.id}>
                         <input 
                             value={todo.text} 
                             placeholder={todo.text}
